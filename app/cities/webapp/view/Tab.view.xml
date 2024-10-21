@@ -1,0 +1,33 @@
+<mvc:View
+    controllerName="coe.cities.controller.Tab"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+>
+    <Page title="{i18n>title}">
+        <TabContainer
+            class="sapUiResponsiveContentPadding sapUiResponsivePadding--header"
+        >
+            <items>
+                <TabContainerItem name="Data from CSV">
+                    <content>
+                        <mvc:XMLView
+                            id="CSVCities"
+                            viewName="coe.cities.view.Table"
+                        />
+                    </content>
+                </TabContainerItem>
+                <TabContainerItem name="Data from JSON">
+                    <content>
+                        <mvc:XMLView
+                            id="JSONCities"
+                            viewName="coe.cities.view.Table"
+                        />
+                    </content>
+                </TabContainerItem>
+            </items>
+        </TabContainer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,81 @@
+<mvc:View
+    controllerName="coe.cities.controller.Table"
+    xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:m="sap.m"
+    height="100%"
+>
+    <Table
+        id="idTable"
+        ariaLabelledBy="title"
+        selectionMode="None"
+        rowMode="Auto"
+    >
+        <extension>
+            <m:OverflowToolbar style="Clear">
+                <m:Title
+                    id="title"
+                    text="Cities"
+                />
+                <m:ToolbarSpacer />
+                <m:SearchField
+                    id="idSearchField"
+                    placeholder="Start typing the city name"
+                    width="20%"
+                    liveChange="onSearch"
+                    class="sapUiSmallMarginEnd"
+                />
+                <m:Button
+                    text="Add"
+                    press="onShowCreateDialog"
+                    class="sapUiSmallMarginEnd"
+                />
+            </m:OverflowToolbar>
+        </extension>
+        <rowSettingsTemplate>
+            <RowSettings
+                highlight="{= Number(${population}.replaceAll(',', '')) > 1000000 ? 'Error' : null}"
+            />
+        </rowSettingsTemplate>
+        <columns>
+            <Column sortProperty="name">
+                <m:Label text="Name" />
+                <template>
+                    <m:Text
+                        text="{name}"
+                        wrapping="false"
+                    />
+                </template>
+            </Column>
+            <Column sortProperty="area">
+                <m:Label text="Area" />
+                <template>
+                    <m:Text
+                        text="{area}"
+                        wrapping="false"
+                    />
+                </template>
+            </Column>
+            <Column sortProperty="population">
+                <m:Label text="Population" />
+                <template>
+                    <m:Text
+                        text="{population}"
+                        wrapping="false"
+                    />
+                </template>
+            </Column>
+            <Column hAlign="End">
+                <m:Label text="Density" />
+                <template>
+                    <m:Text
+                        text="{density}"
+                        wrapping="false"
+                    />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</mvc:View>
