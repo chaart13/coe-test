@@ -1,25 +1,9 @@
-# Getting Started
+# Cities Sample App
 
-Welcome to your new project.
+Tech Stack: SAP CAP(Node.JS) / SAP UI5.<br/>
+To start it locally:
 
-It contains these folders and files, following our recommended project layout:
+- install modules via `npm run init`
+- run `cds watch` or `npm run watch-cities` to open the app automatically.
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
-
-
-## Next Steps
-
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
-
-
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
+App is also deployed to my trial BTP account, so it should be also available [here](https://65c8f6cctrial.launchpad.cfapps.us10.hana.ondemand.com/site?siteId=c3dabb7c-2a3e-4c95-a351-8a0643a2daf0#Shell-home).
