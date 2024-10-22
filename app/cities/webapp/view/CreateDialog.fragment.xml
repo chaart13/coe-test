@@ -16,7 +16,8 @@
                 />
                 <Input
                     id="idNameInput"
-                    class="sapUiSmallMarginEnd"
+                    required="true"
+                    change="onInputChange"
                 />
             </VBox>
             <VBox class="sapUiSmallMarginBottom">
@@ -24,14 +25,24 @@
                     text="Area"
                     labelFor="idAreaInput"
                 />
-                <Input id="idAreaInput" />
+                <Input
+                    id="idAreaInput"
+                    required="true"
+                    type="Number"
+                    change="onInputChange"
+                />
             </VBox>
             <VBox>
                 <Label
                     text="Population"
                     labelFor="idPopInput"
                 />
-                <Input id="idPopInput" />
+                <Input
+                    id="idPopInput"
+                    required="true"
+                    type="Number"
+                    change="onInputChange"
+                />
             </VBox>
         </content>
         <beginButton>
@@ -39,6 +50,7 @@
                 text="Create"
                 type="Emphasized"
                 press="onCreate"
+                enabled="false"
             />
         </beginButton>
         <endButton>

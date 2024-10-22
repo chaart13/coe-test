@@ -4,8 +4,9 @@ sap.ui.define(
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/model/FilterType",
+    "sap/ui/core/ValueState",
   ],
-  function (Controller, Filter, FilterOperator, FilterType) {
+  function (Controller, Filter, FilterOperator, FilterType, ValueState) {
     "use strict";
 
     return Controller.extend("coe.cities.controller.Table", {
@@ -19,30 +20,56 @@ sap.ui.define(
           name: "coe.cities.view.CreateDialog",
         });
 
+        this.oNameInput = this.byId("idNameInput");
+        this.oAreaInput = this.byId("idAreaInput");
+        this.oPopInput = this.byId("idPopInput");
+
+        this.oInput = {
+          [this.oNameInput]: false,
+          [this.oAreaInput]: false,
+          [this.oPopInput]: false,
+        };
+
         this.oDialog.open();
       },
 
+      onFormatError: function (oEvent) {
+        console.log(oEvent);
+      },
+
       onCreate: async function () {
-        const oView = this.getView();
-        const data = {
-          name: oView.byId("idNameInput").getValue(),
-          area: oView.byId("idAreaInput").getValue(),
-          population: oView.byId("idPopInput").getValue(),
+        const oData = {
+          name: this.oNameInput.getValue(),
+          area: this.oAreaInput.getValue(),
+          population: this.oPopInput.getValue(),
         };
 
-        let oBindList = oView
-          .getModel()
-          .bindList(this._getEntitySet(oView.getId()));
-
-        const a = oBindList.create(data);
-        // TODO: refresh the page after creation
-        oBindList.refresh();
-
+        this.getView().byId("idTable").getBinding("rows").create(oData);
         this.oDialog.close();
       },
 
       _getEntitySet(viewId) {
         return `/${viewId.substring(viewId.lastIndexOf("-") + 1)}`;
+      },
+
+      onNumericInput(oEvent) {
+        this.onInputChange(oEvent);
+      },
+
+      onInputChange(oEvent) {
+        const oInput = oEvent.getSource();
+
+        if (oInput.getValue() === "") {
+          this.oInput[oInput] = false;
+          oInput.setValueState(ValueState.Error);
+        } else {
+          this.oInput[oInput] = true;
+          oInput.setValueState(ValueState.None);
+        }
+
+        this.oDialog
+          .getBeginButton()
+          .setEnabled(Object.values(this.oInput).every((value) => value));
       },
 
       onCancel: function () {
@@ -70,6 +97,10 @@ sap.ui.define(
           .byId("idTable")
           .getBinding("rows")
           .filter(oFilter, FilterType.Application);
+      },
+
+      formatDecimal: function (nValue) {
+        return Number(nValue.replaceAll(",", "")).toFixed(2);
       },
     });
   }

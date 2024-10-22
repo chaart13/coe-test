@@ -53,7 +53,10 @@
                 <m:Label text="Area" />
                 <template>
                     <m:Text
-                        text="{area}"
+                        text="{
+                            path: 'area',
+                            formatter: '.formatDecimal'
+                        }"
                         wrapping="false"
                     />
                 </template>
@@ -71,7 +74,10 @@
                 <m:Label text="Density" />
                 <template>
                     <m:Text
-                        text="{density}"
+                        text="{
+                            path: 'density',
+                            formatter: '.formatDecimal'
+                        }"
                         wrapping="false"
                     />
                 </template>
