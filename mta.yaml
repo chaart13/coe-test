@@ -37,6 +37,44 @@ modules:
     requires:
       - name: coe-test-db
 
+  - name: coe-test-destinations
+    type: com.sap.application.content
+    requires:
+      - name: coe-test-auth
+        parameters:
+          service-key:
+            name: coe-test-auth-key
+      - name: coe-test-html5-repo-host
+        parameters:
+          service-key:
+            name: coe-test-html5-repo-host-key
+      - name: srv-api
+      - name: coe-test-destination
+        parameters:
+          content-target: true
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: coe-test-app-srv
+              TokenServiceInstanceName: coe-test-uaa
+              TokenServiceKeyName: coe-test-uaa-key
+              URL: "~{srv-api/srv-url}"
+              sap.cloud.service: coe.service
+            - Name: coe-test-html5-repo-host
+              ServiceInstanceName: coe-test-html5-repo-host
+              ServiceKeyName: coe-test-html5-repo-host-key
+              sap.cloud.service: coe.service
+            - Authentication: OAuth2UserTokenExchange
+              Name: coe-test-uaa
+              ServiceInstanceName: coe-test-uaa
+              ServiceKeyName: coe-test-uaa-key
+              sap.cloud.service: coe.service
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
 resources:
   - name: coe-test-db
     type: com.sap.xs.hdi-container
@@ -52,3 +90,15 @@ resources:
       config:
         xsappname: coe-test-${org}-${space}
         tenant-mode: dedicated
+  - name: coe-test-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+  - name: coe-test-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
