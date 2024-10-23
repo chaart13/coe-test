@@ -32,9 +32,9 @@
     },
     "requires": {
       "[production]": {
-        "db": "hana"
-      },
-      "auth": "xsuaa"
+        "db": "hana",
+        "auth": "xsuaa"
+      }
     }
   }
 }
