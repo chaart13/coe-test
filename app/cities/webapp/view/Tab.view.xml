@@ -7,27 +7,39 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
 >
     <Page title="{i18n>title}">
-        <TabContainer
-            class="sapUiResponsiveContentPadding sapUiResponsivePadding--header"
-        >
-            <items>
-                <TabContainerItem name="Data from CSV">
-                    <content>
-                        <mvc:XMLView
-                            id="CSVCities"
-                            viewName="coe.cities.view.Table"
-                        />
-                    </content>
-                </TabContainerItem>
-                <TabContainerItem name="Data from JSON">
-                    <content>
-                        <mvc:XMLView
-                            id="JSONCities"
-                            viewName="coe.cities.view.Table"
-                        />
-                    </content>
-                </TabContainerItem>
-            </items>
-        </TabContainer>
+        <content>
+            <TabContainer
+                class="sapUiResponsiveContentPadding sapUiResponsivePadding--header"
+            >
+                <items>
+                    <TabContainerItem name="Data from CSV">
+                        <content>
+                            <mvc:XMLView
+                                id="CSVCities"
+                                viewName="coe.cities.view.Table"
+                            />
+                        </content>
+                    </TabContainerItem>
+                    <TabContainerItem name="Data from JSON">
+                        <content>
+                            <mvc:XMLView
+                                id="JSONCities"
+                                viewName="coe.cities.view.Table"
+                            />
+                        </content>
+                    </TabContainerItem>
+                </items>
+            </TabContainer>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Import from File"
+                    class="sapUiMediumMarginEnd"
+                    press="onUpload"
+                />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
